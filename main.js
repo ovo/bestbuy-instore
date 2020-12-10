@@ -41,6 +41,11 @@ const init = async (previousItems, skuInfo) => {
     body,
     method: 'POST',
   });
+
+  if (!storesResp.ok) {
+    return init(previousItems, skuInfo);
+  }
+
   const storesJson = await storesResp.json();
   const { items, locations } = storesJson.ispu;
 
