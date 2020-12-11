@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 
-export const sendLocation = async ({
+export const sendLocationStatus = async ({
   webhook, product, link, location, image, price, status,
 }) => fetch(webhook, {
   method: 'POST',

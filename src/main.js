@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import { sendLocation, sendISPUEligible } from './util/discord';
+import { sendLocationStatus, sendISPUEligible } from './util/discord';
 import {
   webhook, skus, delayTime, zipCode,
 } from './util/config';
@@ -74,14 +74,12 @@ const init = async (previousItems, skuInfo) => {
         location.locationId === l.locationId
       ));
 
-      if (!previousLocation) {
-        return init(items, productInfo);
-      }
-      if (!!location.availability && !previousLocation.availability) {
+      if ((!previousItems && !!location.availability)
+      || (!!location.availability && !previousLocation.availability)) {
         const { names, price, url } = productInfo.find((product) => (
           product.sku.skuId === item.sku
         )).sku;
-        await sendLocation({
+        await sendLocationStatus({
           webhook,
           product: names.short,
           link: `https://www.besbuy.com${url}`,
