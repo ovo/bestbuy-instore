@@ -17,7 +17,7 @@
     "yaml": "^1.10.0"
   },
   "scripts": {
-    "dev": "node -r esm main.js",
+    "dev": "node -r esm src/main.js",
     "build": "babel src -d lib",
     "start": "node lib/main.js"
   }
